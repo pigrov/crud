@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Container, Button } from "react-bootstrap";
+import { Routes, Route, NavLink } from "react-router-dom";
+import Main from "./components/Main";
+import Post from "./components/Post";
+import Form from "./components/Form";
 
-function App() {
+function Menu() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <NavLink className="menu__item" to="/">
+        <Button className="m-2">HomePage</Button>
+      </NavLink>
+      <NavLink className="menu__item" to="/posts/new">
+        <Button className="m-2">NewPost</Button>
+      </NavLink>
+    </Container>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <Container>
+      <Menu />
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/posts/new" element={<Form />} />
+        <Route path="/posts/:id" element={<Post />} />
+      </Routes>
+    </Container>
+  );
+}
